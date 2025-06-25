@@ -6,27 +6,37 @@
 </head>
 <body>
 
-<h2>게시물 작성</h2>
-<hr>
-<!-- 제목, 본문, 작성자, 작성 버튼 -->
-<div>
-    <form th:action="@{/board/write}" method="post">
-        <div>
-            <label>제목</label>
-            <input type="text" name="title">
+<nav th:replace="~{layout/main::pageNavbar('write')}"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            
+            <h2>게시물 작성</h2>
+
+            <!-- 제목, 본문, 작성자, 작성 버튼 -->
+            <div>
+                <form th:action="@{/board/write}" method="post">
+                    <div>
+                        <label>제목</label>
+                        <input type="text" name="title">
+                    </div>
+                    <div>
+                        <label>본문</label>
+                        <textarea type="text" name="content" rows="5"></textarea>
+                    </div>
+                    <div>
+                        <label>작성자</label>
+                        <input type="text" name="writer">
+                    </div>
+                    <div>
+                        <button>작성</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
-        <div>
-            <label>본문</label>
-            <textarea type="text" name="content" rows="5"></textarea>
-        </div>
-        <div>
-            <label>작성자</label>
-            <input type="text" name="writer">
-        </div>
-        <div>
-            <button>작성</button>
-        </div>
-    </form>
+    </div>
 </div>
 
 

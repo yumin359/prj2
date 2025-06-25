@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<nav th:replace="~{layout/main::pageNavbar('_')}"></nav>
 
 <form th:action="@{/board/edit}" method="post">
     <input type="hidden" name="id" th:value="${view.id}">
