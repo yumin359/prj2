@@ -32,6 +32,7 @@ public class BoardService {
         return list;
     }
 
+    // 게시물 하나 보기
     public BoardDto view(Integer id) {
         /*
         Optional<Board> byId = boardRepository.findById(id);
@@ -49,10 +50,22 @@ public class BoardService {
         // controller에서 try catch로 nullpointException 잡아주면 되니까 여기서 바로 .get 해서 해도 될듯
         Board board = boardRepository.findById(id).get();
         BoardDto boardDto = new BoardDto();
+        boardDto.setId(board.getId()); // edit에서 제대로 나오려면 필요함
         boardDto.setTitle(board.getTitle());
         boardDto.setWriter(board.getWriter());
         boardDto.setCreatedAt(board.getCreatedAt());
         boardDto.setContent(board.getContent());
         return boardDto;
     }
+
+    // 게시물 수정
+    public void update(Integer id) {
+        Board board = boardRepository.findById(id).get();
+        board.setId(board.getId());
+        board.setTitle(board.getTitle());
+        board.setContent(board.getContent());
+        boardRepository.save(board);
+    }
+
+
 }

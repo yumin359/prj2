@@ -54,7 +54,7 @@ public class BoardController {
             BoardDto view = boardService.view(id);
             model.addAttribute("view", view);
             return "board/view";
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
             // Exception으로 포괄처리 말고
             // NoSuchElementException 등 정확히 처리해줘야 함 나중에는 ㅎㅎ
             rttr.addFlashAttribute("alert",
@@ -63,6 +63,35 @@ public class BoardController {
             // FIXME : 이따 꾸밀 때 확인해 봐야겠음
             return "redirect:/board/list";
         }
+    }
+
+    // 게시물 수정(화면)-값은 게시물 하나보기 처럼 가져오는데, edit.html이라서 화면이 다름
+    @GetMapping("edit")
+    public String editBoard(Integer id, Model model, RedirectAttributes rttr) {
+        try {
+            BoardDto view = boardService.view(id);
+            model.addAttribute("view", view);
+            return "board/edit";
+        } catch (NoSuchElementException e) {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "danger", "message", "존재하지 않는 게시물 입니다."));
+            return "redirect:/board/list";
+        }
+    }
+
+    // 게시물 수정(실제로 처리 되는)
+    @PostMapping("edit")
+    public String editPost(Integer id, RedirectAttributes rttr) {
+        try {
+            boardService.update(id);
+            return "redirect:/board/view";
+        } catch (Exception e) {
+            // TODO : 수정이 안 되었을 때
+            return "redirect:/board/edit";
+//            return "redirect:/board/list";
+        }
+        // FIXME : ID를 돌려받아야 view?id=숫자로 갈지 edit?id=숫자로 갈지 알 수 있음
+        // 지금은 저장 버튼 누르면 그냥 edit로만 가짐!
     }
 
 }

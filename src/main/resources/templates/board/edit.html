@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('수정해야함')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/board/edit}" method="post">
+    <!--제목 -> 크고 진하게-->
+    <h2 th:text="${view.title}" contenteditable="true"></h2>
+    <!--작성자 -> 글씨 작고 색깔 연하게?-->
+    <!--작성일자는 안씀, 수정되게 하는 거는 나중에 ... -->
+    <div>
+        <!--    <label></label>-->
+        <input type="text"
+               name="writer"
+               th:value="${view.writer}"
+               readonly>
+    </div>
+    <!--본문-->
+    <div>
+        <!--    <label></label>-->
+        <textarea name="content"
+                  th:text="${view.content}"
+                  rows="5"></textarea>
+    </div>
+
+    <div>
+        <button>저장</button>
+    </div>
+</form>
+
+<th:block th:replace="~{layout/main::commonScript}"/>
+</body>
+</html>
