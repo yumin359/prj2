@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.sql.DataSource;
@@ -42,10 +43,12 @@ public class BoardController {
 
     // 게시물 목록 보기
     @GetMapping("list")
-    public String listBoard(Board data, Model model) {
-        List<Board> result = boardService.list(data);
-        model.addAttribute("boardList", result);
-//        model.addAllAttributes(result); // 나중에 쓸 듯
+    public String listBoard(@RequestParam(defaultValue = "1")
+                            Integer page,
+                            Model model) {
+        Map<String, Object> result = boardService.list(page);
+//        model.addAttribute("boardList", result); // 하나 볼때는 이걸로 해주는 듯?
+        model.addAllAttributes(result); // 나중에 쓸 듯
         return "board/list";
     }
 

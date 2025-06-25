@@ -26,7 +26,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="board : ${boardList}">
-                        <td th:text="${board.id}"></td>
+                        <td th:text="${board.id}" th:type="hidden"></td>
+                        <!--                        TODO : 번호 부분 가리고 싶당 -->
+                        <!--                        <input type="hidden" name="id" th:value="${board.id}">-->
                         <td>
                             <a th:href="@{/board/view(id=${board.id})}"
                                th:text="${board.title}"></a>
@@ -37,6 +39,28 @@
                     </tbody>
                 </table>
             </div>
+
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:if="${leftPage > 10}">
+                        <a class="page-link" th:href="@{/board/list(page=${leftPage - 10})}">
+                            <span>&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"
+                        th:each="pageNumber : ${#numbers.sequence(leftPage, rightPage)}"
+                        th:classappend="${(currentPage == pageNumber) ? 'active' : ''}">
+                        <a class="page-link"
+                           th:href="@{/board/list(page=${pageNumber})}"
+                           th:text="${pageNumber}"></a>
+                    </li>
+                    <li class="page-item" th:if="${(rightPage + 1) <= totalPages}">
+                        <a class="page-link" th:href="@{/board/list(page=${rightPage + 1})}">
+                            <span>&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
         </div>
     </div>

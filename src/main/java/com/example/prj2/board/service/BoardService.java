@@ -5,10 +5,14 @@ import com.example.prj2.board.dto.BoardWrite;
 import com.example.prj2.board.entity.Board;
 import com.example.prj2.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +30,22 @@ public class BoardService {
     }
 
     // 게시물 목록 보기
-    public List<Board> list(Board board) {
-        List<Board> list = boardRepository.findAll();
-        return list;
+    public Map<String, Object> list(Integer page) {
+        Page<Board> pageBoard = boardRepository.findAllBy(PageRequest.of(page - 1, 10, Sort.by("id")));
+        List<Board> list = pageBoard.getContent();
+
+        int rightPage = ((page - 1) / 10 + 1) * 10;
+        int leftPage = rightPage - 9;
+        rightPage = Math.min(rightPage, pageBoard.getTotalPages());
+
+        var result = Map.of("boardList", list,
+                "totalElements", pageBoard.getTotalElements(),
+                "totalPages", pageBoard.getTotalPages(),
+                "rightPage", rightPage,
+                "leftPage", leftPage,
+                "currentPage", page);
+
+        return result;
     }
 
     // 게시물 하나 보기
