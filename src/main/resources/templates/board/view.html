@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('-')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--제목 -> 크고 진하게-->
+<h2 th:text="${view.title}"></h2>
+<!--작성자 작성일자 -> 글씨 작고 색깔 연하게?-->
+<div>
+    <!--    <label></label>-->
+    <input type="text"
+           name="writer"
+           th:value="${view.writer}"
+           readonly>
+    <!--    <label></label>-->
+    <input type="text"
+           name="createdAt"
+           th:value="${view.createdAt}"
+           readonly>
+</div>
+<!--본문-->
+<div>
+    <!--    <label></label>-->
+    <textarea type="text"
+              name="content"
+              th:text="${view.content}"
+              rows="5"
+              readonly></textarea>
+</div>
+
+<th:block th:replace="~{layout/main::commonScript}"/>
+</body>
+</html>
