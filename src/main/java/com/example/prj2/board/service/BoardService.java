@@ -24,10 +24,10 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-//    // 게시물 목록 보기
-//    public List<Board> list(Board board) {
-//        List<Board> list = boardRepository.findAll();
-//        return list;
-//    }
+    // 게시물 목록 보기
+    public List<Board> list(Board board) {
+        List<Board> list = boardRepository.findAll();
+        return list;
+    }
 
 }

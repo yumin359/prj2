@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('게시물 목록')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>게시물 목록</h2>
+<hr>
+<!-- 번호 제목 작성자 작성일자-->
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일자</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board : ${boardList}">
+        <td th:text="${board.id}"></td>
+        <td th:text="${board.title}"></td>
+        <td th:text="${board.writer}"></td>
+        <td th:text="${board.createdAt}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<th:block th:replace="~{layout/main::commonScript}"/>
+</body>
+</html>

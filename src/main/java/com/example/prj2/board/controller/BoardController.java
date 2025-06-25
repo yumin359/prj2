@@ -33,12 +33,13 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-//    // 게시물 목록 보기
-//    @GetMapping("list")
-//    public String listBoard(Board data, Model model) {
-//        List<Board> result = boardService.list(data);
-//        model.addAttribute("result", result);
-//        return "board/list";
-//    }
+    // 게시물 목록 보기
+    @GetMapping("list")
+    public String listBoard(Board data, Model model) {
+        List<Board> result = boardService.list(data);
+        model.addAttribute("boardList", result);
+//        model.addAllAttributes(result); // 나중에 쓸 듯
+        return "board/list";
+    }
 
 }
