@@ -7,12 +7,16 @@
 <body>
 
 <form th:action="@{/board/edit}" method="post">
+    <input type="hidden" name="id" th:value="${view.id}">
     <!--제목 -> 크고 진하게-->
-    <h2 th:text="${view.title}" contenteditable="true"></h2>
+    <div>
+        <label>제목</label>
+        <input type="text" name="title" th:value="${view.title}">
+    </div>
     <!--작성자 -> 글씨 작고 색깔 연하게?-->
     <!--작성일자는 안씀, 수정되게 하는 거는 나중에 ... -->
     <div>
-        <!--    <label></label>-->
+        <label>작성자</label>
         <input type="text"
                name="writer"
                th:value="${view.writer}"
@@ -20,7 +24,7 @@
     </div>
     <!--본문-->
     <div>
-        <!--    <label></label>-->
+        <label>본문</label>
         <textarea name="content"
                   th:text="${view.content}"
                   rows="5"></textarea>

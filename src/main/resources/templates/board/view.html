@@ -6,16 +6,19 @@
 </head>
 <body>
 
-<!--제목 -> 크고 진하게-->
-<h2 th:text="${view.title}"></h2>
+<div>
+    <!--제목 -> 크고 진하게-->
+    <label>제목</label>
+    <input type="text" name="title" th:value="${view.title}" readonly>
+</div>
 <!--작성자 작성일자 -> 글씨 작고 색깔 연하게?-->
 <div>
-    <!--    <label></label>-->
+    <label>작성자</label>
     <input type="text"
            name="writer"
            th:value="${view.writer}"
            readonly>
-    <!--    <label></label>-->
+    <label>작성일자</label>
     <input type="text"
            name="createdAt"
            th:value="${view.createdAt}"

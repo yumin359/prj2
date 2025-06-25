@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -59,11 +58,15 @@ public class BoardService {
     }
 
     // 게시물 수정
-    public void update(Integer id) {
-        Board board = boardRepository.findById(id).get();
-        board.setId(board.getId());
-        board.setTitle(board.getTitle());
-        board.setContent(board.getContent());
+    public void update(BoardWrite data) {
+        // 조회
+        Board board = boardRepository.findById(data.getId()).get();
+        // 수정
+        board.setTitle(data.getTitle());
+        board.setContent(data.getContent());
+        board.setWriter(data.getWriter());
+//        board.setCreatedAt(data.getCreatedAt()); // 얜 있어도 안 변함
+        // 저장
         boardRepository.save(board);
     }
 

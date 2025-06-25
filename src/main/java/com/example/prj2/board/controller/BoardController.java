@@ -81,17 +81,16 @@ public class BoardController {
 
     // 게시물 수정(실제로 처리 되는)
     @PostMapping("edit")
-    public String editPost(Integer id, RedirectAttributes rttr) {
-        try {
-            boardService.update(id);
-            return "redirect:/board/view";
-        } catch (Exception e) {
-            // TODO : 수정이 안 되었을 때
-            return "redirect:/board/edit";
-//            return "redirect:/board/list";
-        }
-        // FIXME : ID를 돌려받아야 view?id=숫자로 갈지 edit?id=숫자로 갈지 알 수 있음
-        // 지금은 저장 버튼 누르면 그냥 edit로만 가짐!
+    public String editPost(BoardWrite data, RedirectAttributes rttr) {
+        boardService.update(data);
+
+        rttr.addFlashAttribute("alert",
+                Map.of("code", "success", "message",
+                        data.getId() + "번 게시물이 수정되었습니다."));
+
+        rttr.addAttribute("id", data.getId());
+
+        return "redirect:/board/view";
     }
 
 }
