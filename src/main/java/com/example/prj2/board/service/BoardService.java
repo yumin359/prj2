@@ -70,5 +70,9 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    // 게시물 삭제
+    public void remove(Integer id) {
+        boardRepository.deleteById(id);
+    }
 
 }

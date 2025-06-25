@@ -93,4 +93,11 @@ public class BoardController {
         return "redirect:/board/view";
     }
 
+    // 게시물 삭제
+    @PostMapping("remove")
+    public String removeBoard(Integer id) {
+        boardService.remove(id);
+        return "redirect:/board/list";
+    }
+
 }
