@@ -40,6 +40,20 @@
                 </table>
             </div>
 
+            <!--검색-->
+            <div class="mb-3 pagination justify-content-center">
+                <form th:action="@{/board/list}">
+                    <div class="input-group">
+                        <input class="form-control"
+                               type="text"
+                               name="keyword"
+                               placeholder="제목 또는 작성자 검색"
+                               th:value="${param.keyword ?: ''}"/>
+                        <button class="btn btn-outline-primary">검색</button>
+                    </div>
+                </form>
+            </div>
+
             <nav>
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:if="${leftPage > 10}">

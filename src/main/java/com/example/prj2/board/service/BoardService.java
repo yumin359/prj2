@@ -30,8 +30,15 @@ public class BoardService {
     }
 
     // 게시물 목록 보기
-    public Map<String, Object> list(Integer page) {
-        Page<Board> pageBoard = boardRepository.findAllBy(PageRequest.of(page - 1, 10, Sort.by("id")));
+    public Map<String, Object> list(String keyword, Integer page) {
+        Page<Board> pageBoard;
+        if (keyword == null || keyword.isEmpty()) {
+            pageBoard = boardRepository.findAllBy(
+                    PageRequest.of(page - 1, 10, Sort.by("id")));
+        } else {
+            pageBoard = boardRepository.findAllByTitleOrWriter("%" + keyword + "%", "%" + keyword + "%",
+                    PageRequest.of(page - 1, 10, Sort.by("id")));
+        }
         List<Board> list = pageBoard.getContent();
 
         int rightPage = ((page - 1) / 10 + 1) * 10;

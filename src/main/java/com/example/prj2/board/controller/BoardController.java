@@ -43,10 +43,12 @@ public class BoardController {
 
     // 게시물 목록 보기
     @GetMapping("list")
-    public String listBoard(@RequestParam(defaultValue = "1")
+    public String listBoard(@RequestParam(defaultValue = "")
+                            String keyword,
+                            @RequestParam(defaultValue = "1")
                             Integer page,
                             Model model) {
-        Map<String, Object> result = boardService.list(page);
+        Map<String, Object> result = boardService.list(keyword, page);
 //        model.addAttribute("boardList", result); // 하나 볼때는 이걸로 해주는 듯?
         model.addAllAttributes(result); // 나중에 쓸 듯
         return "board/list";
