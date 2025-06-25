@@ -62,6 +62,20 @@
                 </ul>
             </div>
 
+            <!--alert-->
+            <div th:if="${alert != null}" class="container mb-4">
+                <div class="row">
+                    <div class="col">
+                        <div th:text="${alert.message}"
+                             th:classappend="|alert-${alert.code}|"
+                             class="alert"
+                             role="alert">
+                            A simple primary alert—check it out!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </nav>
 
