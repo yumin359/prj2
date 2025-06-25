@@ -33,8 +33,10 @@ public class BoardController {
 
     // 게시물 작성(실제로 값이 들어가게)
     @PostMapping("write")
-    public String writePost(BoardWrite boardWrite) {
+    public String writePost(BoardWrite boardWrite, RedirectAttributes rttr) {
         boardService.add(boardWrite);
+        rttr.addFlashAttribute("alert",
+                Map.of("code", "success", "message", "게시물이 작성되었습니다."));
         return "redirect:/board/list";
     }
 
@@ -59,8 +61,6 @@ public class BoardController {
             // NoSuchElementException 등 정확히 처리해줘야 함 나중에는 ㅎㅎ
             rttr.addFlashAttribute("alert",
                     Map.of("code", "danger", "message", "존재하지 않는 게시물 입니다."));
-            // alert은 지금 안 나오는데 gpt는 html에서 처리해줘야 한다는데 흠 강사님이랑 할 때는 그런 거 안 했음
-            // FIXME : 이따 꾸밀 때 확인해 봐야겠음
             return "redirect:/board/list";
         }
     }
@@ -85,8 +85,7 @@ public class BoardController {
         boardService.update(data);
 
         rttr.addFlashAttribute("alert",
-                Map.of("code", "success", "message",
-                        data.getId() + "번 게시물이 수정되었습니다."));
+                Map.of("code", "success", "message", "게시물이 수정되었습니다."));
 
         rttr.addAttribute("id", data.getId());
 
@@ -95,8 +94,10 @@ public class BoardController {
 
     // 게시물 삭제
     @PostMapping("remove")
-    public String removeBoard(Integer id) {
+    public String removeBoard(Integer id, RedirectAttributes rttr) {
         boardService.remove(id);
+        rttr.addFlashAttribute("alert",
+                Map.of("code", "warning", "message", "게시물이 삭제되었습니다."));
         return "redirect:/board/list";
     }
 
