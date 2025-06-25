@@ -6,53 +6,87 @@
 </head>
 <body>
 <nav th:replace="~{layout/main::pageNavbar('_')}"></nav>
+
 <div class="container">
-    <div class="row">
-        <div class="col">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
 
-            <div>
-                <!--제목 -> 크고 진하게-->
-                <label>제목</label>
-                <input type="text" name="title" th:value="${view.title}" readonly>
-            </div>
-            <!--작성자 작성일자 -> 글씨 작고 색깔 연하게?-->
-            <div>
-                <label>작성자</label>
-                <input type="text"
-                       name="writer"
-                       th:value="${view.writer}"
-                       readonly>
-                <label>작성일자</label>
-                <input type="text"
-                       name="createdAt"
-                       th:value="${view.createdAt}"
-                       readonly>
-            </div>
-            <!--본문-->
-            <div>
-                <!--    <label></label>-->
-                <textarea name="content"
-                          th:text="${view.content}"
-                          rows="5"
-                          readonly></textarea>
+            <!-- 제목 -->
+            <h2 class="mt-3 fw-bold mb-3" th:text="${view.title}">제목</h2>
+
+            <!-- 작성자 / 작성일자 -->
+            <div class="d-flex justify-content-between text-muted mb-3">
+                <div th:text="'작성자: ' + ${view.writer}">작성자</div>
+                <div th:text="'작성일자: ' + ${view.createdAt}">작성일자</div>
             </div>
 
-            <!--수정, 삭제 버튼 추가-->
-            <div>
-                <!--수정 버튼 링크 추가 필요함-->
-                <a th:href="@{/board/edit(id=${view.id})}">수정</a>
+            <!-- 본문 -->
+            <div class="border rounded p-3 mb-4" style="min-height: 150px;">
+                <pre class="m-0" th:text="${view.content}" style="white-space: pre-wrap;"></pre>
+            </div>
+
+            <!-- 수정 / 삭제 버튼 -->
+            <div class="d-flex justify-content-end gap-2">
+                <a th:href="@{/board/edit(id=${view.id})}" class="btn btn-outline-secondary">수정</a>
 
                 <form th:action="@{/board/remove}" method="post">
                     <input type="hidden" name="id" th:value="${view.id}">
-                    <button>삭제</button>
+                    <button type="submit" class="btn btn-outline-danger">삭제</button>
                 </form>
-                
             </div>
-
 
         </div>
     </div>
 </div>
+
+<!--<div class="container">-->
+<!--    <div class="row justify-content-center">-->
+<!--        <div class="col col-lg-6">-->
+
+<!--            <div>-->
+<!--                &lt;!&ndash;제목 : 크고 진하게&ndash;&gt;-->
+<!--                <label>제목</label>-->
+<!--                <input type="text" name="title" th:value="${view.title}" readonly>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;작성자 작성일자 -> 글씨 작고 색깔 연하게?&ndash;&gt;-->
+<!--            <div>-->
+<!--                <label>작성자</label>-->
+<!--                <input type="text"-->
+<!--                       name="writer"-->
+<!--                       th:value="${view.writer}"-->
+<!--                       readonly>-->
+<!--                <label>작성일자</label>-->
+<!--                <input type="text"-->
+<!--                       name="createdAt"-->
+<!--                       th:value="${view.createdAt}"-->
+<!--                       readonly>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;본문&ndash;&gt;-->
+<!--            <div>-->
+<!--                &lt;!&ndash;    <label></label>&ndash;&gt;-->
+<!--                <textarea name="content"-->
+<!--                          th:text="${view.content}"-->
+<!--                          rows="5"-->
+<!--                          readonly></textarea>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash;수정, 삭제 버튼 추가&ndash;&gt;-->
+<!--            <div>-->
+<!--                &lt;!&ndash;수정 버튼 링크 추가 필요함&ndash;&gt;-->
+<!--                <a th:href="@{/board/edit(id=${view.id})}">수정</a>-->
+
+<!--                <form th:action="@{/board/remove}" method="post">-->
+<!--                    <input type="hidden" name="id" th:value="${view.id}">-->
+<!--                    <button>삭제</button>-->
+<!--                </form>-->
+
+<!--            </div>-->
+
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
 
 <th:block th:replace="~{layout/main::commonScript}"/>
 </body>

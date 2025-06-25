@@ -9,31 +9,29 @@
 <nav th:replace="~{layout/main::pageNavbar('write')}"></nav>
 
 <div class="container">
-    <div class="row">
-        <div class="col">
-            
-            <h2>게시물 작성</h2>
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+
+            <h3 class="mt-3 mb-3 fw-bold">게시물 작성</h3>
 
             <!-- 제목, 본문, 작성자, 작성 버튼 -->
-            <div>
-                <form th:action="@{/board/write}" method="post">
-                    <div>
-                        <label>제목</label>
-                        <input type="text" name="title">
-                    </div>
-                    <div>
-                        <label>본문</label>
-                        <textarea type="text" name="content" rows="5"></textarea>
-                    </div>
-                    <div>
-                        <label>작성자</label>
-                        <input type="text" name="writer">
-                    </div>
-                    <div>
-                        <button>작성</button>
-                    </div>
-                </form>
-            </div>
+            <form th:action="@{/board/write}" method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">제목</label>
+                    <input class="form-control" type="text" name="title">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">본문</label>
+                    <textarea class="form-control" type="text" name="content" rows="5"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">작성자</label>
+                    <input class="form-control" type="text" name="writer">
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary">작성</button>
+                </div>
+            </form>
 
         </div>
     </div>
