@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('게시물 작성')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>게시물 작성</h2>
+<hr>
+<!-- 제목, 본문, 작성자, 작성 버튼 -->
+<div>
+    <form th:action="@{/board/write}" method="post">
+        <div>
+            <label>제목</label>
+            <input type="text" name="title">
+        </div>
+        <div>
+            <label>본문</label>
+            <textarea type="text" name="content" rows="5"></textarea>
+        </div>
+        <div>
+            <label>작성자</label>
+            <input type="text" name="writer">
+        </div>
+        <div>
+            <button>작성</button>
+        </div>
+    </form>
+</div>
+
+
+<th:block th:replace="~{layout/main::commonScript}"/>
+</body>
+</html>
