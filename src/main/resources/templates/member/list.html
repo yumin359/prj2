@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('회원 목록')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="~{layout/main::pageNavbar('memberList')}"></nav>
+
+<!--닉네임, 자기소개-->
+<!--TODO:닉네임 눌렀을 때 들어갈 수 있는 건 본인만(즉 로그인 되어 있을 때)-->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+            <table class="table table-hover mt-3">
+                <thead class="table-light">
+                <tr>
+                    <th>닉네임</th>
+                    <th>자기소개</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="member : ${memberList}">
+                    <td th:text="${member.nickName}"></td>
+                    <td th:text="${member.info}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{layout/main::commonScript}"/>
+</body>
+</html>

@@ -28,4 +28,14 @@ public class MemberController {
         memberService.signup(member);
         return "redirect:/board/list";
     }
+
+    // 회원 목록 보기(여러개)
+    @GetMapping("list")
+    public String list(Model model) {
+        model.addAttribute("memberList", memberService.list());
+        return "member/list";
+    }
+
+
+    // 회원 정보 보기(하나보기)
 }

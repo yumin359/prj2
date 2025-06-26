@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -26,4 +28,10 @@ public class MemberService {
 
         memberRepository.save(member);
     }
+
+    // 회원 목록 보기(여러개 보기)
+    public List<Member> list() {
+        return memberRepository.findAll();
+    }
+
 }
