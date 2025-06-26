@@ -77,4 +77,22 @@ public class MemberController {
         return "redirect:/member/view";
     }
 
+    // FIXME : 나중에 경로 8080:/member/login에서 8080:/login(아님 패키지 만들어서 또 다른 컨트롤러 만들기) 되도록 하기
+    // 로그인
+    @GetMapping("login")
+    public String loginForm() {
+        return "member/login";
+    }
+
+    @PostMapping("login")
+    public String loginPost(MemberForm member, RedirectAttributes rttr) {
+        return "redirect:/home";
+    }
+
+    // 로그아웃
+//    @PostMapping("logout")
+//    public String logout(RedirectAttributes rttr) {
+//        return "redirect:/home";
+//    }
+
 }

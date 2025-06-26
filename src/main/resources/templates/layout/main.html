@@ -61,6 +61,18 @@
                            th:classappend="${current == 'memberList' ? 'active' : ''}">
                             회원 목록</a>
                     </li>
+                    <li class="nav-item">
+                        <a th:href="@{/member/login}"
+                           class="nav-link"
+                           th:classappend="${current == 'login' ? 'active' : ''}">
+                            로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/member/logout}"
+                           class="nav-link"
+                           th:classappend="${current == 'logout' ? 'active' : ''}">
+                            로그아웃</a>
+                    </li>
                 </ul>
             </div>
 

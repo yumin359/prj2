@@ -43,7 +43,7 @@ public class MemberService {
         dto.setPassword(member.getPassword());
         dto.setName(member.getName());
         dto.setNickName(member.getNickName());
-        dto.setBirthday(member.getBirthDate());
+        dto.setBirthDate(member.getBirthDate());
         dto.setInfo(member.getInfo());
         return dto;
     }

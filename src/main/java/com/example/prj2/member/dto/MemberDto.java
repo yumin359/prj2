@@ -10,6 +10,6 @@ public class MemberDto {
     private String password;
     private String name;
     private String nickName;
-    private LocalDate birthday;
+    private LocalDate birthDate;
     private String info;
 }
