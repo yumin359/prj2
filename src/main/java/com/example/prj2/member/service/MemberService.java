@@ -1,5 +1,6 @@
 package com.example.prj2.member.service;
 
+import com.example.prj2.member.dto.MemberDto;
 import com.example.prj2.member.dto.MemberSignUpForm;
 import com.example.prj2.member.entity.Member;
 import com.example.prj2.member.repository.MemberRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,4 +36,16 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    // 회원 정보 보기(하나 보기)
+    public MemberDto view(String id) {
+        Member member = memberRepository.findById(id).get();
+        MemberDto dto = new MemberDto();
+        dto.setId(member.getId());
+        dto.setPassword(member.getPassword());
+        dto.setName(member.getName());
+        dto.setNickName(member.getNickName());
+        dto.setBirthday(member.getBirthDate());
+        dto.setInfo(member.getInfo());
+        return dto;
+    }
 }

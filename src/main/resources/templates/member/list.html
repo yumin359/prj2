@@ -21,7 +21,9 @@
                 </thead>
                 <tbody>
                 <tr th:each="member : ${memberList}">
-                    <td th:text="${member.nickName}"></td>
+                    <td>
+                        <a th:href="@{/member/view(id=${member.id})}" th:text="${member.nickName}"></a>
+                    </td>
                     <td th:text="${member.info}"></td>
                 </tr>
                 </tbody>

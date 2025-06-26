@@ -1,5 +1,6 @@
 package com.example.prj2.member.controller;
 
+import com.example.prj2.member.dto.MemberDto;
 import com.example.prj2.member.dto.MemberSignUpForm;
 import com.example.prj2.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.sql.DataSource;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("member")
 public class MemberController {
 
     private final MemberService memberService;
+    private final DataSource dataSource;
 
     // 회원가입(화면)
     @GetMapping("signup")
@@ -36,6 +40,10 @@ public class MemberController {
         return "member/list";
     }
 
-
     // 회원 정보 보기(하나보기)
+    @GetMapping("view")
+    public String view(String id, Model model) {
+        model.addAttribute("memberView", memberService.view(id));
+        return "member/view";
+    }
 }
