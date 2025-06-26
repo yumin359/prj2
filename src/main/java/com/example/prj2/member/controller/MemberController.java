@@ -16,11 +16,13 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    // 회원가입(화면)
     @GetMapping("signup")
     public String signupForm() {
         return "member/signup";
     }
 
+    // 회원가입(값 넘어가는거)
     @PostMapping("signup")
     public String signupPost(MemberSignUpForm member) {
         memberService.signup(member);

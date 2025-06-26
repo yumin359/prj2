@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    // 회원 가입
     public void signup(MemberSignUpForm m) {
         Member member = new Member();
 
