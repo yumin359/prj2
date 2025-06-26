@@ -1,6 +1,7 @@
 package com.example.prj2.board.service;
 
 import com.example.prj2.board.dto.BoardDto;
+import com.example.prj2.board.dto.BoardListInfo;
 import com.example.prj2.board.dto.BoardWrite;
 import com.example.prj2.board.entity.Board;
 import com.example.prj2.board.repository.BoardRepository;
@@ -31,15 +32,16 @@ public class BoardService {
 
     // 게시물 목록 보기
     public Map<String, Object> list(String keyword, Integer page) {
-        Page<Board> pageBoard;
+        Page<BoardListInfo> pageBoard;
+
         if (keyword == null || keyword.isBlank()) {
             pageBoard = boardRepository.findAllBy(
                     PageRequest.of(page - 1, 10, Sort.by("id")));
         } else {
-            pageBoard = boardRepository.findAllByTitleContainsOrWriterContains(keyword, keyword,
+            pageBoard = boardRepository.findKeyword("%" + keyword + "%",
                     PageRequest.of(page - 1, 10, Sort.by("id")));
         }
-        List<Board> list = pageBoard.getContent();
+        List<BoardListInfo> list = pageBoard.getContent();
 
         int rightPage = ((page - 1) / 10 + 1) * 10;
         int leftPage = rightPage - 9;
