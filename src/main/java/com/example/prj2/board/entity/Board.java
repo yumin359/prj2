@@ -22,6 +22,8 @@ public class Board {
 
     @ManyToOne
     @JoinColumn(name = "writer")
+    // 실무에선 @JoinColumn(name = "member_id") 이런식으로 많이 쓴대여 
+    // 근데 일단 애초에 나는 초보라 sql로 둘이 관계 맺음
     private Member writer;
 
     @Column(name = "created_at", insertable = false, updatable = false)
