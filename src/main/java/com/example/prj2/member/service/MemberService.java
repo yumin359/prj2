@@ -1,7 +1,7 @@
 package com.example.prj2.member.service;
 
 import com.example.prj2.member.dto.MemberDto;
-import com.example.prj2.member.dto.MemberSignUpForm;
+import com.example.prj2.member.dto.MemberForm;
 import com.example.prj2.member.entity.Member;
 import com.example.prj2.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     // 회원 가입
-    public void signup(MemberSignUpForm m) {
+    public void signup(MemberForm m) {
         Member member = new Member();
 
         member.setId(m.getId());
@@ -52,6 +51,18 @@ public class MemberService {
     // 회원 삭제
     public void remove(String id) {
         memberRepository.deleteById(id);
+    }
+
+    // 회원 수정
+    public void update(MemberForm m) {
+        // 조회
+        Member member = memberRepository.findById(m.getId()).get();
+        // 수정
+        member.setName(m.getName());
+        member.setNickName(m.getNickName());
+        member.setInfo(m.getInfo());
+        // 저장
+        memberRepository.save(member);
     }
 
 

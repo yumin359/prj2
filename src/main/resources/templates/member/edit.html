@@ -11,53 +11,41 @@
     <div class="row justify-content-center">
         <div class="col col-lg-6">
 
+            <div class="mt-3 mb-3">
+                <h5 class="fw-bold">회원 정보 수정</h5>
+            </div>
+            <hr>
             <!--아이디 닉네임-->
             <!--이름 생년월일-->
             <!--자기소개-->
-            <!--비밀번호는 뺌-->
-            <div class="row mt-2">
-                <div class="col">
-                    <label for="inputId" class="form-label fw-bold">아이디</label>
-                    <input type="text" class="form-control"
-                           name="id" id="inputId"
-                           th:value="${memberView.id}" readonly>
+            <!--비밀번호는 따로 모달로 뺄 거임-->
+            <form th:action="@{/member/edit}" method="post">
+                <input type="hidden" name="id" th:value="${memberEditView.id}"/>
+                <div class="row mt-2">
+                    <div class="col">
+                        <label for="inputName" class="form-label fw-bold">이름</label>
+                        <input type="text" class="form-control"
+                               name="name" id="inputName"
+                               th:value="${memberEditView.name}">
+                    </div>
+                    <div class="col">
+                        <label for="inputNickName" class="form-label fw-bold">닉네임</label>
+                        <input type="text" class="form-control"
+                               name="nickName" id="inputNickName"
+                               th:value="${memberEditView.nickName}">
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="inputNickName" class="form-label fw-bold">닉네임</label>
-                    <input type="text" class="form-control"
-                           name="nickName" id="inputNickName"
-                           th:value="${memberView.nickName}" readonly>
+                <div class="mt-2">
+                    <label for="inputForm" class="form-label fw-bold">자기소개</label>
+                    <textarea class="form-control"
+                              name="info" id="inputForm" rows="10"
+                              th:text="${memberEditView.info}"></textarea>
                 </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col">
-                    <label for="inputName" class="form-label fw-bold">이름</label>
-                    <input type="text" class="form-control"
-                           name="name" id="inputName"
-                           th:value="${memberView.name}" readonly>
-                </div>
-                <div class="col">
-                    <label for="inputBirthDate" class="form-label fw-bold">생년월일</label>
-                    <input type="text" class="form-control"
-                           name="birthDate" id="inputBirthDate"
-                           th:value="${memberView.birthday}" readonly>
-                </div>
-            </div>
-            <div class="mt-2">
-                <label for="inputForm" class="form-label fw-bold">자기소개</label>
-                <textarea class="form-control"
-                          name="info" id="inputForm" rows="10"
-                          th:text="${memberView.info}" readonly></textarea>
-            </div>
 
-            <div class="mt-3 d-flex justify-content-between">
-                <!--뒤로 버튼-->
-                <a th:href="@{/member/list}" class="btn btn-primary">목록</a>
-                <!--확인 버튼-->
-                <a th:href="@{/member/edit}" class="btn btn-outline-dark">수정</a>
-                <!--탈퇴 버튼-->
-                <a th:href="@{/member/edit}" class="btn btn-outline-dark">수정</a>
-            </div>
+                <div class="mt-3 text-end">
+                    <button class="btn btn-primary">수정</button>
+                </div>
+            </form>
 
         </div>
     </div>

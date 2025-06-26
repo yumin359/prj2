@@ -1,7 +1,7 @@
 package com.example.prj2.member.controller;
 
-import com.example.prj2.member.dto.MemberDto;
-import com.example.prj2.member.dto.MemberSignUpForm;
+import com.example.prj2.board.dto.BoardDto;
+import com.example.prj2.member.dto.MemberForm;
 import com.example.prj2.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class MemberController {
 
     // 회원가입(값 넘어가는거)
     @PostMapping("signup")
-    public String signupPost(MemberSignUpForm member, RedirectAttributes rttr) {
+    public String signupPost(MemberForm member, RedirectAttributes rttr) {
         memberService.signup(member);
         rttr.addFlashAttribute("alert",
                 Map.of("code", "success", "message", "회원가입이 완료되었습니다"));
@@ -59,4 +59,22 @@ public class MemberController {
                 Map.of("code", "danger", "message", "탈퇴되었습니다."));
         return "redirect:/member/list";
     }
+
+    // 회원 수정(화면)
+    @GetMapping("edit")
+    public String editForm(String id, Model model, RedirectAttributes rttr) {
+        model.addAttribute("memberEditView", memberService.view(id));
+        return "member/edit";
+    }
+
+    // 회원 수정(실제 값 수정되는)
+    @PostMapping("edit")
+    public String editPost(MemberForm member, RedirectAttributes rttr) {
+        memberService.update(member);
+        rttr.addAttribute("id", member.getId());
+        rttr.addFlashAttribute("alert",
+                Map.of("code", "success", "message", "회원 정보가 수정되었습니다."));
+        return "redirect:/member/view";
+    }
+
 }
