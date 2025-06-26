@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('signup')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="~{layout/main::pageNavbar('signup')}"></nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+
+            <form th:action="@{/member/signup}" method="post">
+                <div class="row mt-2">
+                    <div class="col">
+                        <label class="form-label fw-bold" for="inputId">아이디</label>
+                        <input class="form-control" name="id" id="inputId"
+                               type="text" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label fw-bold" for="inputPW">비밀번호</label>
+                        <input class="form-control" name="password" id="inputPW"
+                               type="password" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <label class="form-label fw-bold" for="inputName">이름</label>
+                        <input class="form-control" name="name" id="inputName"
+                               type="text" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label fw-bold" for="inputNickName">닉네임</label>
+                        <input class="form-control" name="nickName" id="inputNickName"
+                               type="text" required>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <label class="form-label fw-bold" for="inputBirthDate">생년월일</label>
+                    <input class="form-control" name="birthDate" id="inputBirthDate"
+                           type="date">
+                </div>
+                <div class="mt-2">
+                    <label class="form-label fw-bold" for="inputInfo">자기소개</label>
+                    <textarea class="form-control" name="info" id="inputInfo"
+                              type="text" rows="10"></textarea>
+                </div>
+
+                <div class="mt-3 text-end">
+                    <button class="btn btn-primary">가입</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{layout/main::commonScript}"/>
+</body>
+</html>

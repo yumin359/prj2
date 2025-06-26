@@ -17,3 +17,14 @@ SELECT title, content, writer
 FROM board;
 SELECT COUNT(*)
 FROM board;
+
+CREATE TABLE member
+(
+    id         VARCHAR(30) PRIMARY KEY,
+    password   VARCHAR(30) NOT NULL UNIQUE,
+    name       VARCHAR(30) NOT NULL,
+    nick_name  VARCHAR(30) NOT NULL UNIQUE,
+    birth_date DATE        NOT NULL,
+    info       VARCHAR(1000)
+);
+DROP TABLE member;
