@@ -11,3 +11,4 @@ public interface BoardListInfo {
 
     LocalDateTime getCreated();
 }
+// 페이징+검색할 때 제목이나 작성자만 필요하니까 이렇게 만들어서 프로젝션으로

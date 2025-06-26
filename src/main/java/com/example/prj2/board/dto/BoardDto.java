@@ -13,3 +13,4 @@ public class BoardDto { // implements Serializable {
     private LocalDateTime createdAt;
     private String content;
 }
+// 하나 보는 용으로 사용
