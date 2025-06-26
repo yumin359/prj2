@@ -26,7 +26,7 @@ public class BoardService {
         Board board = new Board();
         board.setTitle(boardWrite.getTitle());
         board.setContent(boardWrite.getContent());
-        board.setWriter(boardWrite.getWriter());
+//        board.setWriter(boardWrite.getWriter()); // TODO: Member랑 관계 맺으면서 생긴 오류1
         boardRepository.save(board);
     }
 
@@ -77,7 +77,7 @@ public class BoardService {
         BoardDto boardDto = new BoardDto();
         boardDto.setId(board.getId()); // edit에서 제대로 나오려면 필요함
         boardDto.setTitle(board.getTitle());
-        boardDto.setWriter(board.getWriter());
+//        boardDto.setWriter(board.getWriter()); // TODO: Member랑 관계 맺으면서 생긴 오류2
         boardDto.setCreatedAt(board.getCreatedAt());
         boardDto.setContent(board.getContent());
         return boardDto;
@@ -90,7 +90,7 @@ public class BoardService {
         // 수정
         board.setTitle(data.getTitle());
         board.setContent(data.getContent());
-        board.setWriter(data.getWriter());
+//        board.setWriter(data.getWriter()); // TODO: Member랑 관계 맺으면서 생긴 오류3
 //        board.setCreatedAt(data.getCreatedAt()); // 얜 있어도 안 변함
         // 저장
         boardRepository.save(board);
