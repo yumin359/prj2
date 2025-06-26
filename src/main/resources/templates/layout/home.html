@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main::commonHead('홈 페이지')}"></head>
+<body>
+
+<!-- 네비게이션 -->
+<nav th:replace="~{layout/main::pageNavbar('home')}"></nav>
+
+<!-- 본문 내용 -->
+<div class="container mt-5">
+    <h2>홈 화면입니다</h2>
+</div>
+
+<!-- 스크립트 삽입 -->
+<th:block th:replace="~{layout/main::commonScript}"/>
+</body>
+</html>

@@ -22,7 +22,9 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <!--홈화면(목록)가기-->
-            <a class="navbar-brand" th:href="@{/board/list}">
+            <!--홈화면 가는 거로 바꾸기!-->
+            <a class="navbar-brand" th:href="@{/home}"
+               th:classappend="${current == 'home' ? 'active' : ''}">
                 <i class="fa-solid fa-house" style="color: #74C0FC;"></i>
             </a>
             <!--화면 작아졌을 때 나오는 -->
