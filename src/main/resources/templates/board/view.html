@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<!-- 삭제 modal 1 : 삭제하시겠습니까? -->
+<!-- 삭제 modal -->
 <div class="modal fade" id="deleteCheckModal" aria-hidden="true" aria-labelledby="deleteCheckModalLabel"
      tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -62,43 +62,18 @@
                         data-bs-dismiss="modal" aria-label="Close">
                     취소
                 </button>
-                <!--                <form th:action="@{/board/remove}" method="post">-->
-                <!--                    <input type="hidden" name="id" th:value="${view.id}">-->
-                <button class="btn btn-danger"
-                        data-bs-target="#deleteModal"
-                        data-bs-toggle="modal">
-                    삭제
-                </button>
-                <!--                </form>-->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 삭제 modal 2 : 삭제되었습니다. -->
-<div class="modal fade" id="deleteModal" aria-hidden="true" aria-labelledby="deleteModalLabel"
-     tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteModalLabel">삭제 완료</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                삭제되었습니다.
-            </div>
-            <div class="modal-footer">
-                <!-- TODO: 컨트롤러 고치기 ! ㅎ -->
                 <form th:action="@{/board/remove}" method="post">
                     <input type="hidden" name="id" th:value="${view.id}">
-                    <button class="btn btn-primary" data-bs-toggle="modal">
-                        확인
+                    <button class="btn btn-danger"
+                            data-bs-toggle="modal">
+                        삭제
                     </button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 
 <th:block th:replace="~{layout/main::commonScript}"/>
 </body>
