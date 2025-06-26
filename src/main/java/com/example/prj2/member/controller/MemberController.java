@@ -3,6 +3,7 @@ package com.example.prj2.member.controller;
 import com.example.prj2.board.dto.BoardDto;
 import com.example.prj2.member.dto.MemberForm;
 import com.example.prj2.member.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,7 +86,10 @@ public class MemberController {
     }
 
     @PostMapping("login")
-    public String loginPost(MemberForm member, RedirectAttributes rttr) {
+    public String loginPost(String id, String password,
+                            HttpSession session,
+                            RedirectAttributes rttr) {
+        boolean login = memberService.login(id, password, session);
         return "redirect:/home";
     }
 
