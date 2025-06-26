@@ -46,4 +46,11 @@ public class MemberController {
         model.addAttribute("memberView", memberService.view(id));
         return "member/view";
     }
+
+    // 회원 삭제
+    @PostMapping("remove")
+    public String remove(String id) {
+        memberService.remove(id);
+        return "redirect:/member/list";
+    }
 }

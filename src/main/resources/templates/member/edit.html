@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout/main::commonHead('회원 정보')}">
+<head th:replace="~{layout/main::commonHead('회원 정보 수정')}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<!--TODO:로그인 했을 때 그 사람 이름 뜨고 거기에 색깔 좀 있게 하는 거 해야됨-->
 <nav th:replace="~{layout/main::pageNavbar(_)}"></nav>
 
 <div class="container">
@@ -52,16 +51,17 @@
             </div>
 
             <div class="mt-3 d-flex justify-content-between">
-                <!--목록 버튼-->
+                <!--뒤로 버튼-->
                 <a th:href="@{/member/list}" class="btn btn-primary">목록</a>
-                <!--수정 버튼-->
-                <a th:href="@{/member/edit(id=${memberView.id})}" class="btn btn-outline-dark">수정</a>
+                <!--확인 버튼-->
+                <a th:href="@{/member/edit}" class="btn btn-outline-dark">수정</a>
+                <!--탈퇴 버튼-->
+                <a th:href="@{/member/edit}" class="btn btn-outline-dark">수정</a>
             </div>
 
         </div>
     </div>
 </div>
-
 
 <th:block th:replace="~{layout/main::commonScript}"/>
 </body>

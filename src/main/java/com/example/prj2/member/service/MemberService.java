@@ -48,4 +48,11 @@ public class MemberService {
         dto.setInfo(member.getInfo());
         return dto;
     }
+
+    // 회원 삭제
+    public void remove(String id) {
+        memberRepository.deleteById(id);
+    }
+
+
 }
