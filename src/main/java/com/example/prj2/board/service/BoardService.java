@@ -5,6 +5,7 @@ import com.example.prj2.board.dto.BoardListInfo;
 import com.example.prj2.board.dto.BoardWrite;
 import com.example.prj2.board.entity.Board;
 import com.example.prj2.board.repository.BoardRepository;
+import com.example.prj2.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -73,11 +74,21 @@ public class BoardService {
         }
          */
         // controller에서 try catch로 nullpointException 잡아주면 되니까 여기서 바로 .get 해서 해도 될듯
+        // 근데 보통 서비스에서 다 잡아주고 컨트롤러에는 어떤 오류인지 출력만 하는 느낌인가봄
         Board board = boardRepository.findById(id).get();
         BoardDto boardDto = new BoardDto();
         boardDto.setId(board.getId()); // edit에서 제대로 나오려면 필요함
         boardDto.setTitle(board.getTitle());
-//        boardDto.setWriter(board.getWriter()); // TODO: Member랑 관계 맺으면서 생긴 오류2
+
+//        boardDto.setWriter(board.getWriter()); // 고침
+        // board의 작성자(writer)는 member의 아이디(id)와 관계가 있음
+        // 근데 이제 작성자 이름은 아이디(id)가 아닌 닉네임(nick_name)으로 보이게 하려고
+        MemberDto memberDto = new MemberDto();
+        memberDto.setId(board.getWriter().getId());
+        memberDto.setNickName(board.getWriter().getNickName());
+        // 두 값을 가져와서 board의 writer에 넣어줌
+        boardDto.setWriter(memberDto);
+
         boardDto.setCreatedAt(board.getCreatedAt());
         boardDto.setContent(board.getContent());
         return boardDto;

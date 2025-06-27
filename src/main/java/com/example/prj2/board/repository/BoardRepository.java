@@ -16,7 +16,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
             SELECT b
             FROM Board b
             WHERE b.title LIKE :keyword
-            OR b.writer LIKE :keyword
+            OR b.writer.nickName LIKE :keyword
             """)
     Page<BoardListInfo> findKeyword(String keyword, PageRequest pageRequest);
 

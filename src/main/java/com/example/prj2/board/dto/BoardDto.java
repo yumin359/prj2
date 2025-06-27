@@ -11,7 +11,7 @@ public class BoardDto { // implements Serializable {
     private Integer id;
     private String title;
     //    private String writer;
-    private MemberDto writer; // TODO : 이렇게 해줘야하는 것 같은데 아무튼 확인해보기
+    private MemberDto writer; // 바꿔줌
     private LocalDateTime createdAt;
     private String content;
 }

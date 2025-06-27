@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout/main::commonHead('수정해야함')}">
+<head th:replace="~{layout/main::commonHead(|${view.title} : 수정중|)}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -24,7 +24,7 @@
                     <label class="form-label fw-bold">작성자</label>
                     <input class="form-control" type="text"
                            name="writer"
-                           th:value="${view.writer}"
+                           th:value="${view.writer.nickName}"
                            readonly>
                 </div>
                 <!--본문-->

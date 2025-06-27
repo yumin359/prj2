@@ -2,6 +2,7 @@ package com.example.prj2.member.service;
 
 import com.example.prj2.member.dto.MemberDto;
 import com.example.prj2.member.dto.MemberForm;
+import com.example.prj2.member.dto.MemberListInfo;
 import com.example.prj2.member.entity.Member;
 import com.example.prj2.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpSession;
@@ -33,8 +34,8 @@ public class MemberService {
     }
 
     // 회원 목록 보기(여러개 보기)
-    public List<Member> list() {
-        return memberRepository.findAll();
+    public List<MemberListInfo> list() {
+        return memberRepository.findAllBy();
     }
 
     // 회원 정보 보기(하나 보기)
@@ -78,22 +79,26 @@ public class MemberService {
             // 입력받은 비번이랑 같은 지 확인하고
             if (dbPassword.equals(password)) {
                 // 같으면 dto로 만들어서
-                Member member = db.get();
-                MemberDto dto = new MemberDto();
-                dto.setId(member.getId());
-                dto.setPassword(member.getPassword());
-                dto.setName(member.getName());
-                dto.setNickName(member.getNickName());
-                dto.setBirthDate(member.getBirthDate());
-                dto.setInfo(member.getInfo());
-
-                // session에 넣기
-                session.setAttribute("loggedInUser", dto);
+                addUserToSession(session, db.get());
 
                 return true;
             }
         }
         return false;
+    }
+
+    private static void addUserToSession(HttpSession session, Member member) {
+        MemberDto dto;
+        dto = new MemberDto();
+        dto.setId(member.getId());
+        dto.setPassword(member.getPassword());
+        dto.setName(member.getName());
+        dto.setNickName(member.getNickName());
+        dto.setBirthDate(member.getBirthDate());
+        dto.setInfo(member.getInfo());
+
+        // session에 넣기
+        session.setAttribute("loggedInUser", dto);
     }
 
 }

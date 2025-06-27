@@ -8,5 +8,7 @@ public class BoardWrite {
     private Integer id;
     private String title;
     private String content;
-    private String writer;
+//    private String writer;
+// 로그인 한 사람만 쓸 수 있으니까 필요없어짐
+    // TODO: 그리고 자동으로 로그인 한 사람 이름이 뜨도록 하게 하면 됨
 }

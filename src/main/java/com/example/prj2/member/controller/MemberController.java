@@ -41,6 +41,7 @@ public class MemberController {
     // 회원 목록 보기(여러개)
     @GetMapping("list")
     public String list(Model model) {
+        // 이거 Member로 받아와서 MemberListInfo로 바꿔줌
         model.addAttribute("memberList", memberService.list());
         return "member/list";
     }

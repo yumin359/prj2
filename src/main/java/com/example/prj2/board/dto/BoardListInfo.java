@@ -1,5 +1,7 @@
 package com.example.prj2.board.dto;
 
+import com.example.prj2.member.dto.MemberListInfo;
+
 import java.time.LocalDateTime;
 
 public interface BoardListInfo {
@@ -7,7 +9,8 @@ public interface BoardListInfo {
 
     String getTitle();
 
-    String getWriter();
+    //    String getWriter();
+    public MemberListInfo getWriter();
 
     LocalDateTime getCreatedAt();
 }
