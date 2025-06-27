@@ -91,7 +91,17 @@ public class MemberController {
                             HttpSession session,
                             RedirectAttributes rttr) {
         boolean login = memberService.login(id, password, session);
-        return "redirect:/home";
+
+        if (login) {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "success", "message", "로그인 되었습니다"));
+            return "redirect:/home";
+        } else {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "danger", "message", "아이디/패스워드가 일치하지 않습니다"));
+            rttr.addFlashAttribute("id", id);
+            return "redirect:/member/login";
+        }
     }
 
     // 로그아웃
