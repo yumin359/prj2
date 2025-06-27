@@ -54,7 +54,8 @@
             <div class="mt-3 d-flex justify-content-between">
                 <!--목록 버튼-->
                 <a th:href="@{/member/list}" class="btn btn-primary">목록</a>
-                <div class="gap-2">
+                <!-- 회원 목록을 통해 들어갔을 때 본인 정보만 수정/탈퇴 가능하게 버튼 유무-->
+                <div class="gap-2" th:if="${session.loggedInUser.id == memberView.id}">
                     <!--수정 버튼-->
                     <a th:href="@{/member/edit(id=${memberView.id})}" class="btn btn-outline-dark">수정</a>
                     <!--탈퇴 버튼-->
