@@ -102,18 +102,29 @@ public class BoardController {
         }
     }
 
+
     // 게시물 수정(실제로 처리 되는)
     @PostMapping("edit")
-    public String editPost(BoardWrite data, RedirectAttributes rttr) {
-        boardService.update(data);
+    public String editPost(BoardWrite data,
+                           @SessionAttribute(value = "loggedInUser", required = false)
+                           MemberDto user,
+                           RedirectAttributes rttr) {
 
-        rttr.addFlashAttribute("alert",
-                Map.of("code", "success", "message", "게시물이 수정되었습니다."));
+        boolean result = boardService.update(data, user);
+
+        if (result) {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "success", "message", "게시물이 수정되었습니다."));
+        } else {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "success", "message", "게시물이 수정되지 않았습니다."));
+        }
 
         rttr.addAttribute("id", data.getId());
 
         return "redirect:/board/view";
     }
+    // 일단 처리는 완료됨. 그치만 html 에서 로그인 안 하면 버튼 안 보이게 하는 것도 할 거임
 
     // 게시물 삭제
     @PostMapping("remove")

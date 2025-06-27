@@ -30,7 +30,7 @@ public class BoardService {
         Board board = new Board();
         board.setTitle(boardWrite.getTitle());
         board.setContent(boardWrite.getContent());
-//        board.setWriter(boardWrite.getWriter()); // TODO: Member랑 관계 맺으면서 생긴 오류1
+//        board.setWriter(boardWrite.getWriter()); //
 
         // 로그인 하면, MemberDto에
         // 사용자 아이디(id), 닉네임(nick_name), 자기소개(info)를 가져와서
@@ -106,17 +106,27 @@ public class BoardService {
         return boardDto;
     }
 
-    // 게시물 수정
-    public void update(BoardWrite data) {
-        // 조회
-        Board board = boardRepository.findById(data.getId()).get();
-        // 수정
-        board.setTitle(data.getTitle());
-        board.setContent(data.getContent());
-//        board.setWriter(data.getWriter()); // TODO: Member랑 관계 맺으면서 생긴 오류3
-//        board.setCreatedAt(data.getCreatedAt()); // 얜 있어도 안 변함
-        // 저장
-        boardRepository.save(board);
+    // 게시물 수정 + 로그인시 가능하고 본인만 수정 가능
+    public boolean update(BoardWrite data, MemberDto user) {
+        // 로그인이 되어 있는지 확인
+        if (user != null) {
+            // 조회
+            Board board = boardRepository.findById(data.getId()).get();
+            // board의 writer에 들어있는 아이디(사실상 member.id)랑
+            // 세션에 들어있는 아이디랑 같은지 확인
+            // 즉 로그인이 되어있는 거 확인되고, 본인인지 확인 하는 절차
+            if (board.getWriter().getId().equals(user.getId())) {
+                // 수정
+                board.setTitle(data.getTitle());
+                board.setContent(data.getContent());
+
+                // 저장
+                boardRepository.save(board);
+                return true;
+            }
+        }
+        return false;
+        // 고로 얘는 간단한거라서 예외처리 굳이 안 하고 그냥 if 문으로 처리 하겠다
     }
 
     // 게시물 삭제
