@@ -28,7 +28,7 @@
             <!-- 뒤로(목록) / 수정 / 삭제 버튼 -->
             <div class="d-flex justify-content-between">
                 <a th:href="@{/board/list}" class="btn btn-outline-primary">목록</a>
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2" th:if="${session.loggedInUser.id == view.writer.id}">
                     <a th:href="@{/board/edit(id=${view.id})}" class="btn btn-outline-secondary">수정</a>
 
                     <!--                    <form th:action="@{/board/remove}" method="post">-->
