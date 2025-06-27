@@ -105,9 +105,12 @@ public class MemberController {
     }
 
     // 로그아웃
-//    @PostMapping("logout")
-//    public String logout(RedirectAttributes rttr) {
-//        return "redirect:/home";
-//    }
+    @GetMapping("logout")
+    public String logout(HttpSession session, RedirectAttributes rttr) {
+        session.invalidate();
+        rttr.addFlashAttribute("alert",
+                Map.of("code", "warning", "message", "로그아웃 되었습니다."));
+        return "redirect:/home";
+    }
 
 }
