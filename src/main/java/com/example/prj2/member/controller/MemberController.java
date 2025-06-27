@@ -40,7 +40,14 @@ public class MemberController {
 
     // 회원 목록 보기(여러개)
     @GetMapping("list")
-    public String list(Model model) {
+    public String list(Model model, HttpSession session, RedirectAttributes rttr) {
+        Object user = session.getAttribute("loggedInUser");
+        // 로그인 안 한 사람 회원목록 url 접근 차단
+        if (user == null) {
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "warning", "message", "로그인 후 이용가능합니다."));
+            return "redirect:/member/login";
+        }
         // 이거 Member로 받아와서 MemberListInfo로 바꿔줌
         model.addAttribute("memberList", memberService.list());
         return "member/list";
