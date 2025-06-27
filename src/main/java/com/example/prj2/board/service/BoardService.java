@@ -6,6 +6,8 @@ import com.example.prj2.board.dto.BoardWrite;
 import com.example.prj2.board.entity.Board;
 import com.example.prj2.board.repository.BoardRepository;
 import com.example.prj2.member.dto.MemberDto;
+import com.example.prj2.member.entity.Member;
+import com.example.prj2.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,13 +23,23 @@ import java.util.Map;
 @Transactional
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
 
-    // 게시물 작성
-    public void add(BoardWrite boardWrite) {
+    // 게시물 작성 + 로그인한 사람만 가능(작성자는 로그인 한 사람 닉네임 바로 뜨게)
+    public void add(BoardWrite boardWrite, MemberDto memberDto) {
         Board board = new Board();
         board.setTitle(boardWrite.getTitle());
         board.setContent(boardWrite.getContent());
 //        board.setWriter(boardWrite.getWriter()); // TODO: Member랑 관계 맺으면서 생긴 오류1
+
+        // 로그인 하면, MemberDto에
+        // 사용자 아이디(id), 닉네임(nick_name), 자기소개(info)를 가져와서
+        // 세션에 저장해두므로 지금 writer에 (id)를 넣은 거
+        // 식별을 위해 id를 가져오지만, 화면에 보이는 건 nickName 으로 하면 됨
+        // 값 자체는 세개가 넘어오는 거니까!
+        Member member = memberRepository.findById(memberDto.getId()).get();
+        board.setWriter(member);
+
         boardRepository.save(board);
     }
 

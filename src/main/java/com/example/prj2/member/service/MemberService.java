@@ -87,14 +87,17 @@ public class MemberService {
         return false;
     }
 
+    // 로그인 시 session 저장 하는 것
+    // HttpSession : 서버에 사용자별 데이터를 저장할 수 있게 해주는 객체
+    // 너무 많은 정보 저장하지말기, 중요한 정보 저장 X
     private static void addUserToSession(HttpSession session, Member member) {
         MemberDto dto;
         dto = new MemberDto();
         dto.setId(member.getId());
-        dto.setPassword(member.getPassword());
-        dto.setName(member.getName());
+//        dto.setPassword(member.getPassword()); // 그러므로 이런 패스워드는 안 넣는 게 좋음
+//        dto.setName(member.getName());
         dto.setNickName(member.getNickName());
-        dto.setBirthDate(member.getBirthDate());
+//        dto.setBirthDate(member.getBirthDate());
         dto.setInfo(member.getInfo());
 
         // session에 넣기

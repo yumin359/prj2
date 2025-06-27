@@ -4,7 +4,9 @@ import com.example.prj2.board.dto.BoardDto;
 import com.example.prj2.board.dto.BoardWrite;
 import com.example.prj2.board.entity.Board;
 import com.example.prj2.board.service.BoardService;
+import com.example.prj2.member.dto.MemberDto;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,14 +30,28 @@ public class BoardController {
 
     // 게시물 작성(화면)
     @GetMapping("write")
-    public String writeBoard() {
-        return "board/write";
+    public String writeBoard(HttpSession session, RedirectAttributes rttr) {
+        // 세션에 저장된 사용자 정보를 가져온다
+        Object user = session.getAttribute("loggedInUser");
+
+        if (user != null) {
+            // 값이 있다 -> 로그인이 되었다
+            return "board/write";
+        } else {
+            // 값이 없다 -> 로그인 해야함
+            // html로 보이고 안 보이고 하게 할건데 이렇게 하면 url로 뭐 접근하는 거 차단 가능한듯?
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "warning", "message", "로그인 후 글을 작성해주세요."));
+            return "redirect:/member/login";
+        }
     }
 
     // 게시물 작성(실제로 값이 들어가게)
     @PostMapping("write")
-    public String writePost(BoardWrite boardWrite, RedirectAttributes rttr) {
-        boardService.add(boardWrite);
+    public String writePost(BoardWrite boardWrite,
+//                            MemberDto user,
+                            RedirectAttributes rttr) {
+        boardService.add(boardWrite, user);
         rttr.addFlashAttribute("alert",
                 Map.of("code", "success", "message", "게시물이 작성되었습니다."));
         return "redirect:/board/list";
