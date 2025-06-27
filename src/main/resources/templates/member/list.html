@@ -25,6 +25,9 @@
                         <a th:href="@{/member/view(id=${member.id})}" th:text="${member.nickName}"></a>
                     </td>
                     <td th:text="${member.info}"></td>
+                    <!--처음에 얘가 프록시 객체라서 존재하지 않는다는 exception 발생-->
+                    <!--MemberListInfo가 인터페이스라서(이런 애들은 가짜 객체->프록시라고 함) 얘를 못찾음-->
+                    <!--MemberListInfo에 String getInfo() 추가-->
                 </tr>
                 </tbody>
             </table>
