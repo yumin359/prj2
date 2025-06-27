@@ -22,11 +22,12 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">본문</label>
-                    <textarea class="form-control" type="text" name="content" rows="5"></textarea>
+                    <textarea class="form-control" name="content" rows="5"></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">작성자</label>
-                    <input class="form-control" type="text" name="writer">
+                    <input class="form-control" type="text" name="writer"
+                           th:value="${session.loggedInUser.nickName}" readonly>
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-primary">작성</button>

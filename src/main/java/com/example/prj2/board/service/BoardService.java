@@ -49,10 +49,10 @@ public class BoardService {
 
         if (keyword == null || keyword.isBlank()) {
             pageBoard = boardRepository.findAllBy(
-                    PageRequest.of(page - 1, 10, Sort.by("id")));
+                    PageRequest.of(page - 1, 10, Sort.by("id").descending()));
         } else {
             pageBoard = boardRepository.findKeyword("%" + keyword + "%",
-                    PageRequest.of(page - 1, 10, Sort.by("id")));
+                    PageRequest.of(page - 1, 10, Sort.by("id").descending()));
         }
         List<BoardListInfo> list = pageBoard.getContent();
 

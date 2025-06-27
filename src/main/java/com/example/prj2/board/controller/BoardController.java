@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.sql.DataSource;
@@ -49,12 +46,17 @@ public class BoardController {
     // 게시물 작성(실제로 값이 들어가게)
     @PostMapping("write")
     public String writePost(BoardWrite boardWrite,
-//                            MemberDto user,
+                            @SessionAttribute(name = "loggedInUser", required = false)
+                            MemberDto user,
                             RedirectAttributes rttr) {
-        boardService.add(boardWrite, user);
-        rttr.addFlashAttribute("alert",
-                Map.of("code", "success", "message", "게시물이 작성되었습니다."));
-        return "redirect:/board/list";
+        if (user != null) {
+            boardService.add(boardWrite, user);
+            rttr.addFlashAttribute("alert",
+                    Map.of("code", "success", "message", "게시물이 작성되었습니다."));
+            return "redirect:/board/list";
+        } else {
+            return "redirect:/member/login";
+        }
     }
 
     // 게시물 목록 보기
